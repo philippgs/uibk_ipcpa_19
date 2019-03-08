@@ -1,0 +1,5 @@
+# ignore binaries
+*_seq
+*_omp
+*_ocl
+*_bench
