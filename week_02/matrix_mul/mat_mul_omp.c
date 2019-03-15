@@ -46,12 +46,13 @@ int main(int argc, char** argv) {
     Matrix C = createMatrix(N,N);
 
     timestamp begin = now();
+
+    // The i and j loop do not carry any dependencies, the k loop does.
+    // Thus, i and j can be parallelized.
+    // For thread-level parallelism (OpenMP) outer-most parallelism is more
+    // beneficial to avoid synchronization overhead.
     
-    
-    // -- BEGIN ASSIGNMENT --
-    
-    // TODO: parallelize the following computation using OpenMP
-    
+    #pragma omp parallel for
     for(long long i = 0; i<N; i++) {
         for(long long j = 0; j<N; j++) {
             value_t sum = 0;
@@ -61,8 +62,6 @@ int main(int argc, char** argv) {
             C[i*N+j] = sum;
         }
     }
-    
-    // -- END ASSIGNMENT --
     
     
     timestamp end = now();
