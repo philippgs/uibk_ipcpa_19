@@ -66,6 +66,7 @@ int main(int argc, char** argv) {
     for(int t=0; t<T; t++) {
 
         // .. we propagate the temperature 
+        #pragma omp parallel for
         for(long long i = 0; i<N; i++) {
             for(long long j = 0; j<N; j++) {
 
